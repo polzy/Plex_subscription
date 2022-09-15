@@ -32,7 +32,7 @@ $list_user = @()
     }
 $list_user | export-csv $csv_autorisation -Delimiter ";" -Encoding UTF8 -NoTypeInformation
 }
-
+get_user_to_csv
 
 Write-host "Utilisateur a kick :" $user_a_kick " Avec le message "$MSG -ForegroundColor Blue
 #Récup les informations des streams sur Plex
