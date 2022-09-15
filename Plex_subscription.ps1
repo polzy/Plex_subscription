@@ -1,10 +1,7 @@
 ############ Configuration ##########
 ############  Version 1.0  ##########
-while (1 -eq 1 ){
-
-
 $PMS_IP='192.168.1.100:32400'
-$TOKEN='nepbhgAn_3-yb_C2-xBE'
+$TOKEN=''
 $MSG='Abonnement expire : Rendez-vous sur http://BITOKU.com '
 $user_a_kick = "Polzy"
 $secondes = "600"
@@ -68,8 +65,4 @@ $u = $searchIMP.user
 $s = $searchIMP.session
 invoke-webrequest "http://$PMS_IP/status/sessions/terminate?sessionId=$s&reason=$MSG&X-Plex-Client-Identifier=$u&X-Plex-Token=$TOKEN"
 write-host "Kick $a_kick OK." -ForegroundColor Blue
-}
-
-
-start-sleep -seconds 5
 }
