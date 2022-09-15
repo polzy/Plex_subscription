@@ -1,19 +1,21 @@
 ############ Configuration ##########
 ############  Version 1.0  ##########
+Remove-Variable * -ErrorAction SilentlyContinue
 $PMS_IP='192.168.1.100:32400'
 $TOKEN=''
-$MSG='Abonnement expire : Rendez-vous sur http://BITOKU.com '
+$MSG='Abonnement expire : Rendez-vous sur http://SITE.com '
 $user_a_kick = "Polzy"
 $secondes = "600"
 $csv_autorisation = "F:\Plex\Plex_management\Plex_autorisation.csv"
 $image_gif = "touz.gif"
-$Web_Hook_Discord = 
+$Web_Hook_Discord = "https://discord.com/api/webhooks/843162628868014150/sfOz65QMR1TQY1s3tPFWHt69K5RXBUqtawVgqvh6ENMFAIvN4SZc1NRXIPHHUBH5hSKf"
 #####################################
 #Module pour les notifications
 import-Module PSDiscord
-import-Module BurntToast
+#import-Module BurntToast
 $searchIMP = ""
 $a_kick = ""
+$session =
 $CSV = Import-Csv $csv_autorisation -Delimiter ";" 
 Write-host "Utilisateur a kick :" $user_a_kick " Avec le message "$MSG -ForegroundColor Blue
 #Récup les informations des streams sur Plex
@@ -51,6 +53,7 @@ Foreach($Ligne in $CSV){
     if ($date -gt $date_retard2){
        $a_kick = $Ligne.User
         write-host "Abonnement de" $Ligne.User "terminé." $date_retard2  -ForegroundColor Blue
+       
     }
 }
 }
@@ -65,4 +68,7 @@ $u = $searchIMP.user
 $s = $searchIMP.session
 invoke-webrequest "http://$PMS_IP/status/sessions/terminate?sessionId=$s&reason=$MSG&X-Plex-Client-Identifier=$u&X-Plex-Token=$TOKEN"
 write-host "Kick $a_kick OK." -ForegroundColor Blue
+$messageDiscord = "Kick de " + $a_kick + "avec le message : " + $MSG + " Date de fin : " + $date_retard2 
+	    Send-DiscordMessage -WebHookUrl $Web_Hook_Discord -Text $messageDiscord
+        $Ligne.User
 }
