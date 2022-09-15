@@ -2,7 +2,7 @@
 ############  Version 1.0  ##########
 Remove-Variable * -ErrorAction SilentlyContinue
 $PMS_IP='192.168.1.100:32400'
-$TOKEN='nepbhgAn_3-yb_C2-xBE'
+$TOKEN=''
 $MSG='Abonnement expire : Rendez-vous sur http://SITE.com '
 $csv_autorisation = "F:\Plex\Plex_management\Plex_autorisation.csv"
 $Web_Hook_Discord = ""
