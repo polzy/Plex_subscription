@@ -8,7 +8,7 @@ $user_a_kick = "Polzy"
 $secondes = "600"
 $csv_autorisation = "F:\Plex\Plex_management\Plex_autorisation.csv"
 $image_gif = "touz.gif"
-$Web_Hook_Discord = "https://discord.com/api/webhooks/843162628868014150/sfOz65QMR1TQY1s3tPFWHt69K5RXBUqtawVgqvh6ENMFAIvN4SZc1NRXIPHHUBH5hSKf"
+$Web_Hook_Discord = ""
 #####################################
 #Module pour les notifications
 import-Module PSDiscord
