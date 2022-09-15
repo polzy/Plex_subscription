@@ -4,10 +4,7 @@ Remove-Variable * -ErrorAction SilentlyContinue
 $PMS_IP='192.168.1.100:32400'
 $TOKEN=''
 $MSG='Abonnement expire : Rendez-vous sur http://SITE.com '
-$user_a_kick = "Polzy"
-$secondes = "600"
 $csv_autorisation = "F:\Plex\Plex_management\Plex_autorisation.csv"
-$image_gif = "touz.gif"
 $Web_Hook_Discord = ""
 #####################################
 #Module pour les notifications
