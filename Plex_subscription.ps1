@@ -14,6 +14,10 @@ import-Module PSDiscord
 $CSV = Import-Csv $csv_autorisation -Delimiter ";" 
 $date = get-date 
 function save_csv{
+    $get_path_backup = Test-Path ".\backup"
+    if(!$get_path_backup){
+        New-Item ".\backup" -itemType Directory 
+    }
     #Sauvegarde le CSV (1 fois par jour)
     $varMaDate = get-date -Format "dd-MM-yyyy"
     if(Get-ChildItem .\backup -Filter $varMaDate*.csv){
