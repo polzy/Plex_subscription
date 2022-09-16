@@ -1,10 +1,10 @@
 ############ Configuration ##########
-############  Version 1.0  ##########
+############  Version 1.2  ##########
 Remove-Variable * -ErrorAction SilentlyContinue
 $PMS_IP='192.168.1.100:32400'
 $TOKEN=''
 $MSG='Abonnement expire : Rendez-vous sur http://SITE.com '
-$csv_autorisation = "F:\Plex\Plex_management\Plex_autorisation.csv"
+$csv_autorisation = ".\Plex_autorisation.csv"
 $Web_Hook_Discord = ""
 #####################################
 #Module pour les notifications
@@ -12,7 +12,19 @@ import-Module PSDiscord
 #import-Module BurntToast
 #####################################
 $CSV = Import-Csv $csv_autorisation -Delimiter ";" 
+$date = get-date 
+function save_csv{
+    #Sauvegarde le CSV (1 fois par jour)
+    $varMaDate = get-date -Format "dd-MM-yyyy"
+    if(Get-ChildItem .\backup -Filter $varMaDate*.csv){
+        write-host "Sauvegarde du CSV déjà traitée." -ForegroundColor Blue
+    }else{
+        Copy-Item ".\$csv_autorisation" –Destination ".\backup\$varMaDate-$csv_autorisation"
+        write-host "Sauvegarde du CSV." -ForegroundColor Blue
+    }
+}
 function get_user_to_csv {
+    #Export de la liste est users PLEX vers le CSV
 $Get_users = invoke-webrequest "https://plex.tv/api/users/?X-Plex-Token=$TOKEN"
 $xml_users = [xml]$Get_users
 $list_user = @()
@@ -32,6 +44,7 @@ $list_user = @()
     }
 $list_user | export-csv $csv_autorisation -Delimiter ";" -Encoding UTF8 -NoTypeInformation
 }
+save_csv
 get_user_to_csv
 
 Write-host "Utilisateur a kick :" $user_a_kick " Avec le message "$MSG -ForegroundColor Blue
@@ -60,7 +73,7 @@ $list = @()
     }
 Write-host "Utilisateur en stream :" $list.user -ForegroundColor Blue
 #On cherche l'user a kick
-$date = get-date 
+
     Foreach($Ligne in $CSV){
         if($list.user -like $Ligne.User)
         {
