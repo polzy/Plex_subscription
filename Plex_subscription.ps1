@@ -1,5 +1,5 @@
 ############ Configuration ##########
-############  Version 1.2  ##########
+############  Version 1.3  ##########
 Remove-Variable * -ErrorAction SilentlyContinue
 $PMS_IP='192.168.1.100:32400'
 $TOKEN=''
