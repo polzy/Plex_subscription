@@ -1,15 +1,16 @@
-### Plex_subscription
-Ouvrir le .ps1 et remplir la conf : 
 
-Lancer le script avec le planificateur de tache Windows. 
-Faire une boucle Powershell bug avec Windows donc je ne l'ai pas ajouté, le vidage mémoire ne fonctionne pas donc le script va prendre de plus en plus de RAM.
+### Plex User Management Script
+This script manages Plex Media Server (PMS) users based on their subscription end dates and sends notifications to Discord when a user with an expired subscription is streaming.
 
-### Note : 
-- 1.0 : update du script
-- 1.1 : Ajout des notifs discord
-- 1.2 : Sauvegarde du CSV dans le dossier Backup (1 fois par jour)
-  - Création du dossier backup automatiquement
-
-### A faire : 
-- Kick via l'ID plutôt que l'username
-- Sauvegarde du CSV : OK
+### Features:
+CSV Backup: Automatically backs up the current CSV with user authorizations to a backup directory.
+User Sync with Plex: Fetches users from PMS and syncs with the CSV.
+Active Stream Monitoring: Lists active streaming users.
+Subscription Verification: Checks for users with expired subscriptions.
+User Termination: Kicks out users streaming with expired subscriptions.
+Discord Notification: Sends a message to Discord when a user with an expired subscription is kicked.
+### Configuration:
+Set PMS IP, token, expiration message, CSV path, and Discord webhook in the configuration section.
+Ensure the PSDiscord module is installed for Discord notifications.
+### Usage:
+Run the script regularly to monitor and manage active Plex users based on their subscription status.
